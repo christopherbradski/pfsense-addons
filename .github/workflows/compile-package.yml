@@ -1,0 +1,21 @@
+name: Compile pfSense packages
+
+on:
+    push:
+      branches:
+        - main
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          pkg -y install git
+      - name: Build package
+        run: |
+          pwd
+          ls -la
+          
