@@ -10,14 +10,14 @@ jobs:
     name: pfSense Package Builder
     runs-on: self-hosted
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-      - name: Set up pfSense build environment
-        id: pfsense
-        uses: vmactions/freebsd-vm@v1
-        with:
-          usesh: true
-          prepare: |
-            pkg update
-            pkg install -y git
-            pkg install -y poudriere
+    - uses: actions/checkout@v4
+    - name: Set up pfSense build environment
+      id: pfsense
+      uses: vmactions/freebsd-vm@v1
+      with:
+        usesh: true
+        prepare: |
+          pkg install -y git
+          pkg install -y poudriere
+        run: |
+          freebsd-version
