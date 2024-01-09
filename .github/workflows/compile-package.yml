@@ -13,7 +13,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
       - name: Set up pfSense build environment
-        uses: vmactions/freebsd-vm@1.0.0
+        uses: vmactions/freebsd-vm@1
         with:
           usesh: true
           prepare: |
