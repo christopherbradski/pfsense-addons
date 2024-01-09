@@ -21,6 +21,3 @@ jobs:
             pkg update
             pkg install -y git
             pkg install -y poudriere
-          run: |
-            pwd
-            ls -la
