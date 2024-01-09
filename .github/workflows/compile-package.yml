@@ -7,15 +7,19 @@ on:
 
 jobs:
   build:
+    name: pfSense Package Builder
     runs-on: self-hosted
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
-      - name: Install dependencies
-        run: |
-          pkg -y install git
-      - name: Build package
-        run: |
-          pwd
-          ls -la
-          
+        uses: actions/checkout@v4
+      - name: Set up pfSense build environment
+        uses: vmactions/freebsd-vm@1.0.0
+        with:
+          usesh: true
+          prepare: |
+            pkg update
+            pkg install -y git
+            pkg install -y poudriere
+          run: |
+            pwd
+            ls -la
