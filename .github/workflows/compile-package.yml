@@ -13,8 +13,8 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
       - name: Set up pfSense build environment
-        uses: vmactions/freebsd-vm@1.0.0
-        with:
+        uses: vmactions/freebsd-vm@1
+        with:https://github.com/christopherbradski/pfsense-addons/actions/runs/7465749323/job/20315604231#logs
           usesh: true
           prepare: |
             pkg update
