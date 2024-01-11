@@ -6,7 +6,7 @@ DISTFILES=      # none
 EXTRACT_ONLY=   # none
 
 MAINTAINER=chris.bradski@gmail.com
-COMMENT=        pfSense package pfblockerng-addon-whitelist_rulegen
+COMMENT=        pfSense package pfsense-pkg-pfblockerng_whitelist_rulegen
 
 LICENSE=        APACHE20
 
@@ -52,8 +52,11 @@ do-install:
 	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/etc/rc.d/svc_whitelist.sh \
 		${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/etc/rc.d
 
-	${INSTALL_DATA} -m 0755 ${FILESDIR}${PREFIX}/www/whitelist_rulegen_configure.php \
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/www/whitelist_rulegen_configure.php \
 		${STAGEDIR}${PREFIX}/www
+
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfsense-pkg-pfblockerng_whitelist_rulegen.xml \
+		${STAGEDIR}${PREFIX}/pkg
 
 	${MKDIR} ${STAGEDIR}/pkg/pfblockerng-addon-whitelist_rulegen/venv
 
