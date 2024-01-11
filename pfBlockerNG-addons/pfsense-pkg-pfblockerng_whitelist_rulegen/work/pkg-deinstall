@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Path to the virtual environment
+VENV_PATH="/usr/local/pkg/pfblockerng-addon-whitelist_rulegen/venv"
+
+# Remove the virtual environment directory
+rm -rf ${VENV_PATH}
+rm -f /usr/local/etc/rc.d/svc_whitelist
+
+/usr/local/bin/php -f /etc/rc.packages pfsense-pkg-pfblockerng_whitelist_rulegen ${2}

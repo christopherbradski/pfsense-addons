@@ -1,0 +1,1 @@
+wildcard is a simple daemon that watches the logs from unbound DNS. When a wildcard whitelist domain is entered in pfBlockerng, it creates an alias and rules to allow outbound traffic based on the resolved ip address of the DNS whitelist.
