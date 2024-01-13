@@ -1,0 +1,18 @@
+name: "hello_world"
+version: "1.0"
+origin: sysutils/pfsense-pkg-hello_world
+comment: <<EOD
+A simple Hello World pfSense package
+EOD
+maintainer: chris.bradski@gmail.com
+prefix: /usr/local
+categories: [ sysutils, ]
+licenselogic: single
+licenses: [ APACHE20, ]
+arch : freebsd:14:*
+abi : FreeBSD:14:*
+deps: { 
+"php82": {origin: "lang/php82", version: "8.2.11"}
+}
+options: {
+}

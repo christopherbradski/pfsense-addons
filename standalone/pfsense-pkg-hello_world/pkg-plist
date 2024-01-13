@@ -1,0 +1,4 @@
+www/hello_world.php
+etc/rc.d/hello_world_service.sh
+
+%%DATADIR%%/info.xml
