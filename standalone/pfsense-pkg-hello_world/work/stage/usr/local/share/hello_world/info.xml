@@ -1,22 +1,12 @@
-<package>
-    <name>helloworld</name>
-    <version>1.0</version>
-    <title>Hello World Package</title>
-    <description>This is a simple Hello World package for pfSense.</description>
-    <menu>
-        <name>Hello World Service</name>
-        <section>Services</section>
-        <url>hello_world.php</url>
-    </menu>
-    <service>
-        <name>helloworldservice</name>
-        <rcfile>hello_world_service.sh</rcfile>
-        <executable>hello_world_service.sh</executable>
-        <description>Hello World background service</description>
-    </service>
-    <includes>
-        <file>hello_world.xml</file>
-    </includes>
-    <develonly>NO</develonly>
-    <maintainer>chris.bradski@gmail.com</maintainer>
-</package>
+<?xml version="1.0"?>
+<pfsensepkgs>
+    <package>
+        <name>hello_world</name>
+        <version>1.0</version>
+        <descr>This is a simple Hello World package for pfSense.</description>
+        <configurationfile>hello_world.xml</configurationfile>
+        <logging>
+            <logfilename>hello_world/hello_world.log</logfilename>
+        </logging>
+    </package>
+</pfsensepkgs>

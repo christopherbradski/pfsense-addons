@@ -23,7 +23,10 @@ do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	${MKDIR} ${STAGEDIR}${PREFIX}/www
 	${MKDIR} ${STAGEDIR}${PREFIX}/etc/rc.d
+	${MKDIR} ${STAGEDIR}${PREFIX}/pkg
 	${MKDIR} ${STAGEDIR}${PREFIX}/share
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/hello_world.xml \
+		${STAGEDIR}${PREFIX}/pkg
 	${INSTALL_DATA} ${FILESDIR}${PREFIX}/www/hello_world.php \
 		${STAGEDIR}${PREFIX}/www
 	${INSTALL_SCRIPT} ${FILESDIR}${PREFIX}/etc/rc.d/hello_world_service.sh \

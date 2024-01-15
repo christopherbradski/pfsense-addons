@@ -1,8 +1,9 @@
 /usr/local/share/licenses/hello_world-1.0/catalog.mk
 /usr/local/share/licenses/hello_world-1.0/LICENSE
 /usr/local/share/licenses/hello_world-1.0/APACHE20
-www/hello_world.php
+pkg/hello_world.xml
 etc/rc.d/hello_world_service.sh
+www/hello_world.php
 
 share/hello_world/info.xml
 @owner

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE packagegui SYSTEM "../schema/packages.dtd">
+<?xml-stylesheet type="text/xsl" href="../xsl/package.xsl"?>
+<packagegui>
+    <copyright>
+        <![CDATA[
+/**
+ * hello_world.xml
+ */
+        ]]>
+    </copyright>
+    <description>Hello World</description>
+    <name>hello_world</name>
+    <title>Services: Hello_World</title>
+    <menu>
+        <name>Hello_World</name>
+        <section>Services</section>
+        <configfile>hello_world.xml</configfile>4
+        <url>hello_world.php</url>
+    </menu>
+    <service>
+        <name>hello_world</name>
+        <rcfile>hello_world_service.sh</rcfile>
+        <executable>hello_world</executable>
+        <description>Hello World Service</description>
+    </service>
+    <tabs>
+    </tabs>
+    <fields>
+    </fields>
+    <custom_php_install_command>
+    </custom_php_install_command>
+    <custom_php_resync_config_command>
+    </custom_php_resync_config_command>
+</packagegui>
