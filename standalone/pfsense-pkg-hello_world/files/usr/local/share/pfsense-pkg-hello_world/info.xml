@@ -3,10 +3,7 @@
     <package>
         <name>hello_world</name>
         <version>%%PKGVERSION%%</version>
-        <descr>This is a simple Hello World package for pfSense.</description>
+        <descr><![CDATA[This is a simple Hello World package for pfSense.]]></descr>
         <configurationfile>hello_world.xml</configurationfile>
-        <logging>
-            <logfilename>hello_world/hello_world.log</logfilename>
-        </logging>
     </package>
 </pfsensepkgs>

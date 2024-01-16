@@ -1,7 +1,16 @@
 #!/bin/sh
 
 if [ "${2}" != "POST-INSTALL" ]; then
+	echo "${2}"
 	exit 0
 fi
 
-${PKG_ROOTDIR}/usr/local/bin/php -f ${PKG_ROOTDIR}/etc/rc.packages %%PORTNAME%% ${2}
+case $2 in
+POST-INSTALL)
+	echo "Running configure_menu.php"
+	/usr/local/bin/php -f /usr/local/pkg/hello_world/post_install_tasks.php
+	echo "configure_menu.php script completed"
+	;;
+esac
+
+#${PKG_ROOTDIR}usr/local/bin/php -f ${PKG_ROOTDIR}etc/rc.packages %%PORTNAME%% ${2}

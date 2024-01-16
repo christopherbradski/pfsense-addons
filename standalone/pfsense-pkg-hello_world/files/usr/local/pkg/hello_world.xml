@@ -9,27 +9,28 @@
  */
         ]]>
     </copyright>
-    <description>Hello World</description>
     <name>hello_world</name>
     <title>Services: Hello_World</title>
+    <include_file>/usr/local/pkg/hello_world.inc</include_file>
     <menu>
-        <name>Hello_World</name>
+        <name>Hello World</name>
         <section>Services</section>
-        <configfile>hello_world.xml</configfile>4
-        <url>hello_world.php</url>
+        <url>/hello_world.php</url>
     </menu>
     <service>
         <name>hello_world</name>
         <rcfile>hello_world_service.sh</rcfile>
         <executable>hello_world</executable>
         <description>Hello World Service</description>
+        <startsonsync>true</startsonsync>
     </service>
-    <tabs>
-    </tabs>
-    <fields>
-    </fields>
     <custom_php_install_command>
+        hello_world_install();
     </custom_php_install_command>
+    <custom_php_deinstall_command>
+        hello_world_deinstall();
+    </custom_php_deinstall_command>
     <custom_php_resync_config_command>
+        hello_world_sync();
     </custom_php_resync_config_command>
 </packagegui>

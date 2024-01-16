@@ -1,4 +1,6 @@
+pkg/hello_world.inc
 pkg/hello_world.xml
+pkg/hello_world/post_install_tasks.php
 etc/rc.d/hello_world_service.sh
 www/hello_world.php
 

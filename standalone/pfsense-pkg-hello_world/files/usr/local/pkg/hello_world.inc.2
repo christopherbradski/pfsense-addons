@@ -1,0 +1,82 @@
+#!/usr/local/bin/php -f
+<?php
+require_once("config.inc");
+require_once("functions.inc");
+require_once("globals.inc");
+require_once("pkg-utils.inc");
+require_once("services.inc");
+require_once("service-utils.inc");
+require_once("util.inc");
+
+// Define constants and package-specific functions here
+define('HELLO_WORLD_CONF', '/usr/local/etc/hello_world.conf');
+
+function hello_world_sync() {
+    global $config;
+
+    $hello_world_config = $config['installedpackages']['hello_world']['config'][0];
+
+    if(!($hello_world_config['enable'])) {
+        if(is_process_running('hello_world')) {
+            stop_service('hello_world');
+        }
+        return;
+    }
+
+    if(is_process_running('hello_world')) {
+        stop_service('hello_world');
+    }
+
+    start_service('hello_world');
+
+}
+
+function hello_world_install() {
+    global $config;
+
+    file_put_contents(HELLO_WORLD_CONF, "hello_world_enabled=yes\n");
+
+    // if(!is_array($config['installedpackages']['hello_world'])) {
+    //     $config['installedpackages']['hello_world'] = array();
+    // }
+
+    // if(!is_array($config['installedpackages']['hello_world'])) {
+    //     $config['installedpackages']['hello_world']['config'] = array();
+    // }
+
+    $menu_item = array(
+        'name' => 'Hello World',
+        'section' => 'Services',
+        'url' => '/pkg_edit.php?xml=hello_world.xml',
+        'desc' => 'Hello World configuration'
+    );
+
+    // Check if the menu item already exists
+    if (!is_array($config['installedpackages']['menu'])) {
+        $config['installedpackages']['menu'] = array();
+    }
+
+    // Add the menu item
+    $config['installedpackages']['menu'][] = $menu_item;
+
+    write_config("[hello_world] package installed.");
+}
+
+function hello_world_deinstall() {
+    global $config;
+
+    if(is_process_running('hello_world')) {
+        stop_service('hello_world');
+    }
+
+    unset($config['installedpackages']['hello_world']['config'][0]);
+    write_config("[hello_world] package uninstalled.");
+
+}
+
+// Main execution block
+if ($argv[1] == 'POST-INSTALL') {
+    hello_world_install();
+}
+
+?>

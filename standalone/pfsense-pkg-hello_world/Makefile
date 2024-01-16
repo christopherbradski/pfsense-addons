@@ -1,4 +1,4 @@
-PORTNAME=       hello_world
+PORTNAME=       pfsense-pkg-hello_world
 PORTVERSION=    1.0
 CATEGORIES=     sysutils
 MASTER_SITES=   # none
@@ -15,6 +15,10 @@ USES=           php
 
 NO_BUILD=       yes
 NO_ARCH=        yes
+NO_MTREE=	yes
+
+SUB_FILES=	pkg-install pkg-deinstall
+SUB_LIST=	PORTNAME=${PORTNAME}
 
 do-extract:
 	${MKDIR} ${WRKSRC}
@@ -24,9 +28,14 @@ do-install:
 	${MKDIR} ${STAGEDIR}${PREFIX}/www
 	${MKDIR} ${STAGEDIR}${PREFIX}/etc/rc.d
 	${MKDIR} ${STAGEDIR}${PREFIX}/pkg
+	${MKDIR} ${STAGEDIR}${PREFIX}/pkg/hello_world
 	${MKDIR} ${STAGEDIR}${PREFIX}/share
+	${INSTALL_SCRIPT} ${FILESDIR}${PREFIX}/pkg/hello_world.inc \
+		${STAGEDIR}${PREFIX}/pkg
 	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/hello_world.xml \
 		${STAGEDIR}${PREFIX}/pkg
+	${INSTALL_SCRIPT} ${FILESDIR}${PREFIX}/pkg/hello_world/post_install_tasks.php \
+		${STAGEDIR}${PREFIX}/pkg/hello_world
 	${INSTALL_DATA} ${FILESDIR}${PREFIX}/www/hello_world.php \
 		${STAGEDIR}${PREFIX}/www
 	${INSTALL_SCRIPT} ${FILESDIR}${PREFIX}/etc/rc.d/hello_world_service.sh \
