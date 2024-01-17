@@ -1,3 +1,6 @@
+
+%%DATADIR%%/info.xml
+
 pkg/pfblockerng-addon-whitelist_rulegen/etc/rc.d/svc_whitelist.sh
 pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/__init__.py
 pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/__main__.py
@@ -8,7 +11,10 @@ pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/filtersets/common.py
 
 pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense/__init__.py
 pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense/api.py
+pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense/extract_config.php
 
-www/whitelist_rulegen_configure.php
+www/pfblockerng-addon-whitelist_rulegen/whitelist_rulegen_configure.php
 
-pkg/pfsense-pkg-pfblockerng_whitelist_rulegen.xml
+pkg/pfblockerng-addon-whitelist_rulegen.xml
+
+pkg/pfblockerng-addon-whitelist_rulegen/post_install_tasks.php

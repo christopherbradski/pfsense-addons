@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<pfsensepkgs>
+	<package>
+		<name>pfblockerng-addon-whitelist_rulegen</name>
+        <desc><![CDATA[Wildcard DNS to traditional firewall support for pfSense]]></desc>
+        <version>%%PKGVERSION%%</version>
+        <configurationfile>pfblocker-addon-whitelist_rulegen.xml</configurationfile>
+        <maintainer><![CDATA[cbooski]]></maintainer>
+    </package>
+</pfsensepkgs>

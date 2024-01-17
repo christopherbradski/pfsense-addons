@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE packagegui SYSTEM "../schema/packages.dtd">
+<?xml-stylesheet type="text/xsl" href="../xsl/package.xsl"?>
+<packagegui>
+        <copyright>
+        <![CDATA[
+/*
+ * pfBlockerNG-addon Whitelist Rulegen
+ *
+ */
+]]>
+        </copyright>
+        <name>whitelister</name>
+        <title>Services: pfBlockerNG addon Whitelist Rulegen</title>
+        <menu>
+                <name>Whitelist Rulegen</name>
+                <section>Services</section>
+                <tooltiptext>Configure DNSBL Whitelist to Rulegen</tooltiptext>
+                <url>/pfblockerng-addon-whitelist_rulegen/whitelist_rulegen_configure.php</url>
+        </menu>
+        <service>
+                <name>whitelist_rulegen</name>
+                <rcfile>svc_whitelist.sh</rcfile>
+                <executable>svc_whitelist</executable>
+        </service>
+</packagegui>

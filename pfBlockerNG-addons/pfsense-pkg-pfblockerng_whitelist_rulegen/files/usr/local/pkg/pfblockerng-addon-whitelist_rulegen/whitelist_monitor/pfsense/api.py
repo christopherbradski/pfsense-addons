@@ -1,13 +1,29 @@
+import json
 import os
 import requests
+import subprocess
 
 from requests.auth import HTTPBasicAuth
 
-# ToDo: Move this to a config file for pfSense UI
+# Enable for local developer mode
+DEVELOPER_MODE=os.getenv("DEVELOPER_MODE", False)
+PHP_SCRIPT = 'extract_config.php'
 
-pfsense_url = os.getenv("PFSENSE_URL", "https://https://127.0.0.1/api/v1/")
-pfsense_username = os.getenv("PFSENSE_USERNAME", "admin")
-pfsense_password = os.getenv("PFSENSE_PASSWORD", "pfsense")
+if DEVELOPER_MODE:
+    pfsense_url = os.getenv("PFSENSE_URL", "https://https://127.0.0.1/api/v1/")
+    pfsense_username = os.getenv("PFSENSE_USERNAME", "admin")
+    pfsense_password = os.getenv("PFSENSE_PASSWORD", "pfsense")
+else:
+    try:
+        result = subprocess.run(['/usr/local/bin/php', PHP_SCRIPT], capture_output=True, text=True)
+        output = result.stdout
+        data = json.loads(output)
+        pfsense_url = os.getenv("PFSENSE_URL", "https://https://127.0.0.1/api/v1/")
+        pfsense_username, pfsense_password = data['username'], data['apikey']
+
+    except:
+        # ToDo(Chris) - Retry logic if xml data is missing
+        pass
 
 auth = HTTPBasicAuth(pfsense_username, pfsense_password)
 

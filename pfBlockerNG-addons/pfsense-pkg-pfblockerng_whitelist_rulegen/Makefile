@@ -25,14 +25,21 @@ do-extract:
 	${MKDIR} ${WRKSRC}
 
 do-install:
+	${MKDIR} ${STAGEDIR}/etc/inc/priv
 	${MKDIR} ${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen
 	${MKDIR} ${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/etc/rc.d
 	${MKDIR} ${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor
 	${MKDIR} ${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/filtersets
 	${MKDIR} ${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense
 	${MKDIR} ${STAGEDIR}${PREFIX}/www
-	${MKDIR} ${STAGEDIR}/etc/inc/priv
+	${MKDIR} ${STAGEDIR}${PREFIX}/www/pfblockerng-addon-whitelist_rulegen
 	${MKDIR} ${STAGEDIR}${DATADIR}
+
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/share/pfsense-pkg-pfblockerng-addon-whitelist_rulegen/info.xml \
+		${STAGEDIR}${DATADIR}
+
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/post_install_tasks.php \
+		${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen
 
 	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/__init__.py \
 		${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor
@@ -49,16 +56,21 @@ do-install:
 	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense/api.py \
 		${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense
 
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense/extract_config.php \
+		${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense
+
 	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/etc/rc.d/svc_whitelist.sh \
 		${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/etc/rc.d
 
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/www/whitelist_rulegen_configure.php \
-		${STAGEDIR}${PREFIX}/www
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/www/pfblockerng-addon-whitelist_rulegen/whitelist_rulegen_configure.php \
+		${STAGEDIR}${PREFIX}/www/pfblockerng-addon-whitelist_rulegen
 
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfsense-pkg-pfblockerng_whitelist_rulegen.xml \
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen.xml \
 		${STAGEDIR}${PREFIX}/pkg
 
 	${MKDIR} ${STAGEDIR}/pkg/pfblockerng-addon-whitelist_rulegen/venv
 
+	@${REINPLACE_CMD} -i '' -e "s|%%PKGVERSION%%|${PKGVERSION}|" \
+		${STAGEDIR}${DATADIR}/info.xml
 
 .include <bsd.port.mk>

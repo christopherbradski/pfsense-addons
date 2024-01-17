@@ -7,4 +7,5 @@ VENV_PATH="/usr/local/pkg/pfblockerng-addon-whitelist_rulegen/venv"
 rm -rf ${VENV_PATH}
 rm -f /usr/local/etc/rc.d/svc_whitelist
 
-/usr/local/bin/php -f /etc/rc.packages %%PORTNAME%% ${2}
+
+# /usr/local/bin/php -f /etc/rc.packages %%PORTNAME%% ${2}
