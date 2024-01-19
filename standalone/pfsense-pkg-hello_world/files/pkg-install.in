@@ -7,9 +7,9 @@ fi
 
 case $2 in
 POST-INSTALL)
-	echo "Running configure_menu.php"
+	echo "Running post_install_tasks.php"
 	/usr/local/bin/php -f /usr/local/pkg/hello_world/post_install_tasks.php
-	echo "configure_menu.php script completed"
+	echo "post_install_tasks.php script completed"
 	;;
 esac
 

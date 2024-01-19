@@ -2,28 +2,43 @@ import json
 import os
 import requests
 import subprocess
+import time
 
+from pathlib import Path
 from requests.auth import HTTPBasicAuth
 
 # Enable for local developer mode
 DEVELOPER_MODE=os.getenv("DEVELOPER_MODE", False)
+
 PHP_SCRIPT = 'extract_config.php'
 
 if DEVELOPER_MODE:
-    pfsense_url = os.getenv("PFSENSE_URL", "https://https://127.0.0.1/api/v1/")
+    pfsense_url = os.getenv("PFSENSE_URL", "https://127.0.0.1/api/v1/")
     pfsense_username = os.getenv("PFSENSE_USERNAME", "admin")
     pfsense_password = os.getenv("PFSENSE_PASSWORD", "pfsense")
 else:
-    try:
-        result = subprocess.run(['/usr/local/bin/php', PHP_SCRIPT], capture_output=True, text=True)
-        output = result.stdout
-        data = json.loads(output)
-        pfsense_url = os.getenv("PFSENSE_URL", "https://https://127.0.0.1/api/v1/")
-        pfsense_username, pfsense_password = data['username'], data['apikey']
+    valid_data = False
+    while not valid_data:
+        try:
+            current_file_path = Path(__file__).resolve()
+            current_directory = current_file_path.parent
+            php_path = current_directory / PHP_SCRIPT
+            result = subprocess.run(['/usr/local/bin/php', php_path], capture_output=True, text=True)
+            output = result.stdout
+            data = json.loads(output)
+            pfsense_url = os.getenv("PFSENSE_URL", "https://127.0.0.1/api/v1/")
 
-    except:
-        # ToDo(Chris) - Retry logic if xml data is missing
-        pass
+            if data['username'] is None or data['apikey'] is None:
+                raise ValueError("Missing username or API key")
+
+            pfsense_username = data['username']
+            pfsense_password = data['apikey']
+            pfsense_configured_ttl = data['global_ttl']
+            valid_data = True
+
+        except Exception as e:
+            print(f"Error: {e}. Retrying in 1 minute.")
+            time.sleep(60)
 
 auth = HTTPBasicAuth(pfsense_username, pfsense_password)
 
@@ -126,3 +141,6 @@ def add_ip_to_alias_if_not_exists(alias_name, ip_address):
     else:
         update_alias(alias_name, ip_address)
         return alias_data
+
+def get_configured_ttl():
+    return pfsense_configured_ttl

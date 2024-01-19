@@ -4,8 +4,8 @@ import subprocess
 import time
 
 from pathlib import Path
-from whitelister.filtersets.common import commonFilters
-from whitelister.pfsense import api as pfsense_api
+from whitelist_monitor.filtersets.common import commonFilters
+from whitelist_monitor.pfsense import api as pfsense_api
 
 filters = commonFilters()
 
@@ -20,6 +20,8 @@ class LogWatcher:
         self.log_file = log_file
         self.filter_module = filter_module
         self.ip_table = {}
+
+        self.ttl = pfsense_api.get_configured_ttl()
 
     # Open log file and seek to end to process new lines
     def watch_log(self):
@@ -41,16 +43,21 @@ class LogWatcher:
                             self.update_table(domain, ip_address)
 
     def update_table(self, domain, ip_address):
+        current_time = time.time()
         if domain not in self.ip_table:
-            self.ip_table[domain] = [ip_address]
+            self.ip_table[domain] = [{'address': ip_address, 'timestamp': current_time, 'ttl': self.ttl}]
             self.async_update_firewall(ip_address)
         else:
+            # Remove expired ip addresses
+            self.ip_table[domain] = [ip for ip in self.ip_table[domain] if current_time - ip['timestamp'] < ip['ttl']]
+
             for ip in self.ip_table[domain]:
-                if ip["address"] == ip_address["address"]:
-                    return
-                else:
-                    self.ip_table[domain].append(ip_address)
-                    self.async_update_firewall(ip_address)
+                if ip['address'] == ip_address and current_time - ip['timestamp'] < ip['ttl']:
+                    return # IP address already exists and is not expired
+
+            # Add new address
+            self.ip_table[domain].append({'address': ip_address, 'timestamp': current_time, 'ttl': global_ttl})
+            self.async_update_firewall(ip_address)
 
     # TODO (chris): Convert to task/queue based to process in background
     # Create an alias and or rule if they do not exist

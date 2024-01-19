@@ -1,7 +1,7 @@
 #!/bin/sh
 
-name="whitelister"
-command="/usr/local/pkg/wildcard/venv/bin/python3"
+name="whitelist_monitor"
+command="/usr/local/pkg/pfblockerng-addon-whitelist_rulegen/venv/bin/python3"
 log_file="/var/log/pfblockerng/dns_reply.log"
 pidfile="/var/run/whitelist_monitor.pid"
 
@@ -16,8 +16,8 @@ rc_start() {
         exit 1
     fi
 
-    cd /usr/local/pkg/wildcard || exit
-    ${command} -m whitelister &
+    cd /usr/local/pkg/pfblockerng-addon-whitelist_rulegen || exit
+    ${command} -m whitelist_monitor &
     echo $! > "${pidfile}"
 
     pidnum=$(cat "${pidfile}")

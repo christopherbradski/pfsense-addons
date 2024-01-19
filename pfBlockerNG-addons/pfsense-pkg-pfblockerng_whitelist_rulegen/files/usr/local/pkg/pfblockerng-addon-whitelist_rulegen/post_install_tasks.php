@@ -33,7 +33,7 @@ if (!$found_menu) {
 $service_entry = array(
     'name' => 'whitelist_rulegen', // Name of the service entry
     'description' => 'Whitelist Rulegen Service', // Description of service
-    'rcfile' => 'svc_whitelist.sh', // Service script located in /usr/local/etc/rc.d/
+    'rcfile' => '/usr/local/etc/rc.d/svc_whitelist.sh', // Service script located in /usr/local/etc/rc.d/
     'executable' => 'whitelist', // short name of executable < 19 chars..
 );
 
