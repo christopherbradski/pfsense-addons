@@ -1,9 +1,7 @@
 name: Compile pfSense packages
 
 on:
-    push:
-      branches:
-        - main
+  workflow_dispatch:
 
 jobs:
   build:
@@ -11,6 +9,15 @@ jobs:
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v4
+
+    - name: Cleanup existing VMs
+      run: |
+        sudo virsh --connect qemu:///system list --all
+        sudo virsh --connect qemu:///system destroy freebsd || true
+        sudo virsh --connect qemu:///system undefine freebsd || true
+        sudo rm -f /home/chris/actions-runner/_work/_actions/vmactions/freebsd-vm/v1/freebsd-14.0.qcow2 || true
+      shell: bash
+
     - name: Set up pfSense build environment
       id: pfsense
       uses: vmactions/freebsd-vm@v1

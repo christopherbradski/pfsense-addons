@@ -15,7 +15,19 @@ if (!isset($pkg_config['global_ttl']) || $pkg_config['global_ttl'] === null) {
     write_config("Setting default value for global_ttl in pfBlockerNG-Addon-Whitelist Rulegen");
 }
 
-$global_ttl = $pkg_config['global_ttl'];
+// Configure default interface for rules gen
+if (!isset($pkg_config['interface']) || $pkg_config['interface'] === null) {
+    $pkg_config['interface'] = 'lan'; // Default value for 'lan'
 
-echo json_encode(array("apikey" => $apikey, "username" => $username, "global_ttl" => $global_ttl));
+    // Write the changes back to config.xml
+    write_config("Setting the default interface to LAN");
+}
+
+$global_ttl = $pkg_config['global_ttl'];
+$interface = $pkg_config['interface'];
+
+echo json_encode(array("apikey" => $apikey,
+    "username" => $username,
+    "global_ttl" => $global_ttl,
+    "interface" => $interface));
 ?>

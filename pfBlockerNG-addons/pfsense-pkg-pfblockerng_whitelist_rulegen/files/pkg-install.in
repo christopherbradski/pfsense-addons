@@ -19,7 +19,7 @@ pip install requests
 deactivate
 
 /bin/chmod +x /usr/local/pkg/pfblockerng-addon-whitelist_rulegen/etc/rc.d/svc_whitelist.sh
-/bin/ln -s /usr/local/pkg/pfblockerng-addon-whitelist_rulegen/etc/rc.d/svc_whitelist.sh /usr/local/etc/rc.d/svc_whitelist
+/bin/ln -s /usr/local/pkg/pfblockerng-addon-whitelist_rulegen/etc/rc.d/svc_whitelist.sh /usr/local/etc/rc.d/svc_whitelist.sh
 
 case $2 in
 POST-INSTALL)

@@ -17,7 +17,7 @@ rc_start() {
     fi
 
     cd /usr/local/pkg/pfblockerng-addon-whitelist_rulegen || exit
-    ${command} -m whitelist_monitor &
+    ${command} -m whitelist_monitor --identifier whitelist_svc &
     echo $! > "${pidfile}"
 
     pidnum=$(cat "${pidfile}")
@@ -46,17 +46,15 @@ rc_stop() {
 
 # Displays the status of the Whitelist Monitor
 rc_status() {
-    if [ -f "${pidfile}" ]; then
-        pidnum=$(cat "${pidfile}")
-        if kill -0 "${pidnum}" 2>/dev/null; then
-            echo "Whitelist Monitor is running (PID: ${pidnum})"
-        else
-            echo "Whitelist Monitor is not running"
-        fi
+    if pgrep -f 'whitelist_svc' > /dev/null; then
+        echo "Whitelist Monitor is running"
+        exit 0  # Success exit code
     else
-        echo "No PID file found, Whitelist Monitor is not running"
+        echo "Whitelist Monitor is not running"
+        exit 1  # Failure exit code
     fi
 }
+
 
 # Main Logic
 case "$1" in

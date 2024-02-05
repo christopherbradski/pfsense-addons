@@ -34,7 +34,9 @@ $service_entry = array(
     'name' => 'whitelist_rulegen', // Name of the service entry
     'description' => 'Whitelist Rulegen Service', // Description of service
     'rcfile' => '/usr/local/etc/rc.d/svc_whitelist.sh', // Service script located in /usr/local/etc/rc.d/
-    'executable' => 'whitelist', // short name of executable < 19 chars..
+    'executable' => 'svc_whitelist', // short name of executable < 19 chars..
+    'custom_php_service_status_command' =>
+        "'mwexec(\"/usr/local/etc/rc.d/svc_whitelist.sh status\") == 0;'"
 );
 
 // Check if the service entry already exists
@@ -51,13 +53,14 @@ if (is_array($config['installedpackages']['service'])) {
 // Add the service entry if it doesn't exist
 if (!$found_service) {
     $config['installedpackages']['service'][] = $service_entry;
+    write_config("Installed whitelist service");
     print("Added Whitelist Rulegen service.\n");
 }
 
 // Write changes if new items were added
-if (!$found_menu || !$found_service) {
-    write_config("Added Whitelist Rulegen menu item(s) and service.");
-    print("Configuration updated.\n");
+if (!$found_menu) {
+    write_config("Added Whitelist Rulegen menu item(s)");
+    print("Added Whitelist Rulegen menu item.\n");
 }
 
 print("Whitelist Rulegen configuration completed\n");

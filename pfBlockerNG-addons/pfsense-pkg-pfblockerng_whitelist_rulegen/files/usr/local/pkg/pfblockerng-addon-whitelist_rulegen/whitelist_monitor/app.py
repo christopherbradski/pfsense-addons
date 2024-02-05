@@ -1,3 +1,4 @@
+import logging
 import os
 import re
 import subprocess
@@ -9,10 +10,14 @@ from whitelist_monitor.pfsense import api as pfsense_api
 
 filters = commonFilters()
 
+# Configure logging
+logging.basicConfig(filename='/var/log/whitelist.log',
+                    format='%(asctime)s %(levelname)s: %(message)s',
+                    level=logging.INFO)
+
 
 # This class monitors the dns_reply log and for whitelisted domains and adds
 # the matching host record to an alias and allow rule.
-# TODO (chris): Add expiration for IP addresses
 class LogWatcher:
 
     # Set log file and create empty dictionary
@@ -56,7 +61,7 @@ class LogWatcher:
                     return # IP address already exists and is not expired
 
             # Add new address
-            self.ip_table[domain].append({'address': ip_address, 'timestamp': current_time, 'ttl': global_ttl})
+            self.ip_table[domain].append({'address': ip_address, 'timestamp': current_time, 'ttl': self.ttl})
             self.async_update_firewall(ip_address)
 
     # TODO (chris): Convert to task/queue based to process in background
@@ -67,8 +72,9 @@ class LogWatcher:
         rule_description = "Allow hosts from DNS whitelist."
         if not pfsense_api.alias_exists(alias_name):
             pfsense_api.create_alias(alias_name, ip_address["address"])
+        interface = pfsense_api.get_configured_interface()
         if not pfsense_api.rule_exists(rule_description):
-            pfsense_api.create_firewall_rule(alias_name, rule_description)
+            pfsense_api.create_firewall_rule(alias_name, rule_description, interface)
         alias_data = pfsense_api.add_ip_to_alias_if_not_exists(
             alias_name, ip_address["address"]
         )
@@ -114,8 +120,8 @@ def run():
         filter_module = FilterModule(patterns)
         log_watcher = LogWatcher(LOG_PATH, filter_module)
         log_watcher.watch_log()
-    except:
-        print("Already running or unable to start")
+    except Exception as e:
+        logging.error(f"Error occurred: {e}")
 
 
 

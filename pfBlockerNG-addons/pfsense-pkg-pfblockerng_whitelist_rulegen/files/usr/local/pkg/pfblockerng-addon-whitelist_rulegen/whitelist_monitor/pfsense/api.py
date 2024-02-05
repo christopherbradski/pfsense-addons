@@ -34,6 +34,7 @@ else:
             pfsense_username = data['username']
             pfsense_password = data['apikey']
             pfsense_configured_ttl = data['global_ttl']
+            pfsense_configured_interface = data['interface']
             valid_data = True
 
         except Exception as e:
@@ -62,10 +63,10 @@ def rule_exists(rule_description):
     return False
 
 # Create an firewall rule based using an alias as source
-def create_firewall_rule(alias_name, rule_description):
+def create_firewall_rule(alias_name, rule_description, interface):
     new_rule_payload = {
         "type": "pass",
-        "interface": "lan",
+        "interface": interface,
         "protocol": "any",
         "flaoting": True,
         "src": "any",
@@ -143,4 +144,7 @@ def add_ip_to_alias_if_not_exists(alias_name, ip_address):
         return alias_data
 
 def get_configured_ttl():
-    return pfsense_configured_ttl
+    return int(pfsense_configured_ttl)
+
+def get_configured_interface():
+    return pfsense_configured_interface
