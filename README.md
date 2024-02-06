@@ -24,5 +24,17 @@ To install the pfSense-API, simply run the following command from the pfSense sh
 
 To install the Whitelist-Rulegen-addon, simply run the following command from the pfSense-shell:
 ```
-    pkg -C /dev/null add https://github.com/christopherbradski/pfsense-addons/releases/download/v0.0.1-alpha/pfsense-pkg-pfblockerng_whitelist_rulegen-0.1.pkg
+    setenv IGNORE_OSVERSION yes && pkg -C /dev/null add https://github.com/christopherbradski/pfsense-addons/releases/download/v0.0.1-alpha/pfsense-pkg-pfblockerng_whitelist_rulegen-0.1.pkg
 ```
+
+pfBlockerNG is a standard package within the pfSense repository. To install:
+```
+    pkg install pfSense-pkg-pfBlockerNG
+```
+
+### Configuration & Authentication
+The Whitelist-Rulegen-addon leverages the pfSense-API to updates the whitelist alias, by default this use the same credentials as the webConfigurator. Users may create an additional API user in 'System/User Manager/Users'. To provide the username and password visit 'Services/Whitelist Rulegen'. Enter the Username and password (aka API key).
+
+The IP Address TTL is default to 1 day, decrease or increase this based on your requirements. Everytime a DNS record is resolved the TTL for all records is checked and removed from the alias if there TTL has expired.
+
+The interface to create the allow rules defaults to 'LAN'. Select the interface that the Whitelist-Rulegen addon should create the policy rules for. Click save and restart the service under 'Status/Services'.
