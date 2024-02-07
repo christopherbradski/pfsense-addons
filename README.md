@@ -21,6 +21,7 @@ To install the pfSense-API, simply run the following command from the pfSense sh
 ```
     pkg -C /dev/null add https://github.com/jaredhendrickson13/pfsense-api/releases/latest/download/pfSense-2.7-pkg-API.pkg && /etc/rc.restart_webgui
 ```
+Note: omit "&& /etc/restart_webgui" if not installing via SSH.
 
 To install the Whitelist-Rulegen-addon, simply run the following command from the pfSense-shell:
 ```
