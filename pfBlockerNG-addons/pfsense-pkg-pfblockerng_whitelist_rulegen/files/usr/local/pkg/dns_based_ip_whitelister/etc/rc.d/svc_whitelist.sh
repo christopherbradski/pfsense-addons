@@ -1,7 +1,7 @@
 #!/bin/sh
 
 name="whitelist_monitor"
-command="/usr/local/pkg/pfblockerng-addon-whitelist_rulegen/venv/bin/python3"
+command="/usr/local/pkg/dns_based_ip_whitelister/venv/bin/python3"
 log_file="/var/log/pfblockerng/dns_reply.log"
 pidfile="/var/run/whitelist_monitor.pid"
 
@@ -16,7 +16,7 @@ rc_start() {
         exit 1
     fi
 
-    cd /usr/local/pkg/pfblockerng-addon-whitelist_rulegen || exit
+    cd /usr/local/pkg/dns_based_ip_whitelister || exit
     ${command} -m whitelist_monitor --identifier whitelist_svc &
     echo $! > "${pidfile}"
 

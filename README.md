@@ -1,12 +1,13 @@
 # pfsense-pfBlockerNG-addons
 
-## pfBlockerNG_addon_whitelister-rulegen
+## dns_based_ip_whitelister
 ### Introduction
-The Whitelist_Rulegen-addon compliments a pfBockerNG install by generating traditional firewall rules based off the wildcard whitelist entries. Without this capability, pfBlockerNG is only capable of performing DNS based blackholing. Any request not on the whitelist is forwarded to a non-existent ip address while valid DNS requests are resolved.
 
-Here, we monitor the DNS based requests and create a dynamic alias list and associated "allow" rule. The alias results are checked on each resolution and if an ip address "expires", it will be removed from the associated alias.
+The dns_based_ip_whitelister creates and maintains IP whitelist rules by observing the lookups of whitelisted DNS names.  It currently requires the pfBlockerNG and pfSense-API packages.
 
-Please note: This package requires pfBlockerNG and the pfSense-API package. These dependencies may be removed in a later version.
+pfBlockerNG is traditionally used to block requests from well known bad actors or to restrict access based on DNS black-holing. It does not prevent directly accessing an external host via an IP address.
+
+This is where the dns_based_ip_whitelister plugin comes in. It automates updating an alias with the resolved ip address of any host under a wildard DNS. For example: creating a whitelist entry for .docker.io will update the alias and rule combo when registry-1.docker.io is queried.
 
 ### Requirements
 Supported Versions:
@@ -23,7 +24,7 @@ To install the pfSense-API, simply run the following command from the pfSense sh
 ```
 Note: omit "&& /etc/restart_webgui" if not installing via SSH.
 
-To install the Whitelist-Rulegen-addon, simply run the following command from the pfSense-shell:
+To install the dns_based_ip_whitelister, simply run the following command from the pfSense-shell:
 ```
     setenv IGNORE_OSVERSION yes && pkg -C /dev/null add https://github.com/christopherbradski/pfsense-addons/releases/download/v0.0.1-alpha/pfsense-pkg-pfblockerng_whitelist_rulegen-0.1.pkg
 ```
@@ -34,8 +35,10 @@ pfBlockerNG is a standard package within the pfSense repository. To install:
 ```
 
 ### Configuration & Authentication
-The Whitelist-Rulegen-addon leverages the pfSense-API to updates the whitelist alias, by default this use the same credentials as the webConfigurator. Users may create an additional API user in 'System/User Manager/Users'. To provide the username and password visit 'Services/Whitelist Rulegen'. Enter the Username and password (aka API key).
+The dns_based_ip_whitelister leverages the pfSense-API to updates the whitelist alias, by default this use the same credentials as the webConfigurator. Users may create an additional API user in 'System/User Manager/Users'. To provide the username and password visit 'Services/Whitelist Rulegen'. Enter the Username and password (aka API key).
 
 The IP Address TTL is default to 1 day, decrease or increase this based on your requirements. Everytime a DNS record is resolved the TTL for all records is checked and removed from the alias if there TTL has expired.
 
-The interface to create the allow rules defaults to 'LAN'. Select the interface that the Whitelist-Rulegen addon should create the policy rules for. Click save and restart the service under 'Status/Services'.
+The interface to create the allow rules defaults to 'LAN'. Select the interface that the dns_based_ip_whitelister addon will create the policy rules for. Click save and restart the service under 'Status/Services'.
+
+Once the rule has been created, it should be placed in the desired order amongst any existing rules.

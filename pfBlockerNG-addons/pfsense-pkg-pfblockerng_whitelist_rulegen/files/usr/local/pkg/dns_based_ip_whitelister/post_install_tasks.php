@@ -8,7 +8,7 @@ require_once("pkg-utils.inc");
 $menu_item = array(
     'name' => 'Whitelist Rulegen',
     'section' => 'Services',
-    'url' => '/pfblockerng-addon-whitelist_rulegen/whitelist_rulegen_configure.php',
+    'url' => '/dns_based_ip_whitelister/whitelist_rulegen_configure.php',
     'desc' => 'pfBlockerNG-addon create firewall rules from wildcard DNS whitelist'
 );
 

@@ -1,20 +1,20 @@
 
 %%DATADIR%%/info.xml
 
-pkg/pfblockerng-addon-whitelist_rulegen/etc/rc.d/svc_whitelist.sh
-pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/__init__.py
-pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/__main__.py
-pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/app.py
+pkg/dns_based_ip_whitelister/etc/rc.d/svc_whitelist.sh
+pkg/dns_based_ip_whitelister/whitelist_monitor/__init__.py
+pkg/dns_based_ip_whitelister/whitelist_monitor/__main__.py
+pkg/dns_based_ip_whitelister/whitelist_monitor/app.py
 
-pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/filtersets/__init__.py
-pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/filtersets/common.py
+pkg/dns_based_ip_whitelister/whitelist_monitor/filtersets/__init__.py
+pkg/dns_based_ip_whitelister/whitelist_monitor/filtersets/common.py
 
-pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense/__init__.py
-pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense/api.py
-pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense/extract_config.php
+pkg/dns_based_ip_whitelister/whitelist_monitor/pfsense/__init__.py
+pkg/dns_based_ip_whitelister/whitelist_monitor/pfsense/api.py
+pkg/dns_based_ip_whitelister/whitelist_monitor/pfsense/extract_config.php
 
-www/pfblockerng-addon-whitelist_rulegen/whitelist_rulegen_configure.php
+www/dns_based_ip_whitelister/whitelist_rulegen_configure.php
 
-pkg/pfblockerng-addon-whitelist_rulegen.xml
+pkg/dns_based_ip_whitelister.xml
 
-pkg/pfblockerng-addon-whitelist_rulegen/post_install_tasks.php
+pkg/dns_based_ip_whitelister/post_install_tasks.php

@@ -11,12 +11,12 @@
 ]]>
         </copyright>
         <name>whitelister</name>
-        <title>Services: pfBlockerNG addon Whitelist Rulegen</title>
+        <title>Services: dns_based_ip_whitelister</title>
         <menu>
                 <name>Whitelist Rulegen</name>
                 <section>Services</section>
-                <tooltiptext>Configure DNSBL Whitelist to Rulegen</tooltiptext>
-                <url>/pfblockerng-addon-whitelist_rulegen/whitelist_rulegen_configure.php</url>
+                <tooltiptext>Configure dns_based_ip_whitelister</tooltiptext>
+                <url>/dns_based_ip_whitelister/whitelist_rulegen_configure.php</url>
         </menu>
         <service>
                 <name>whitelist_rulegen</name>

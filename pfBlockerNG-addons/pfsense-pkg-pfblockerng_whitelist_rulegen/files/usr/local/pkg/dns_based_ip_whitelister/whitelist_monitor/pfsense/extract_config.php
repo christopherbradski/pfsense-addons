@@ -2,7 +2,7 @@
 require_once("config.inc");
 
 // Set the main config to the package
-$pkg_config = &$config['pfblockerng-addon-whitelist_rulegen']; // Use reference to modify the original $config array
+$pkg_config = &$config['dns_based_ip_whitelister']; // Use reference to modify the original $config array
 
 $username = $pkg_config['username'];
 $apikey = $pkg_config['apikey'];

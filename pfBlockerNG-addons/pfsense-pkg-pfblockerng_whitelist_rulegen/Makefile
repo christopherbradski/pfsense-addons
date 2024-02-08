@@ -26,49 +26,49 @@ do-extract:
 
 do-install:
 	${MKDIR} ${STAGEDIR}/etc/inc/priv
-	${MKDIR} ${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen
-	${MKDIR} ${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/etc/rc.d
-	${MKDIR} ${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor
-	${MKDIR} ${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/filtersets
-	${MKDIR} ${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense
+	${MKDIR} ${STAGEDIR}${PREFIX}/pkg/dns_based_ip_whitelister
+	${MKDIR} ${STAGEDIR}${PREFIX}/pkg/dns_based_ip_whitelister/etc/rc.d
+	${MKDIR} ${STAGEDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor
+	${MKDIR} ${STAGEDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor/filtersets
+	${MKDIR} ${STAGEDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor/pfsense
 	${MKDIR} ${STAGEDIR}${PREFIX}/www
-	${MKDIR} ${STAGEDIR}${PREFIX}/www/pfblockerng-addon-whitelist_rulegen
+	${MKDIR} ${STAGEDIR}${PREFIX}/www/dns_based_ip_whitelister
 	${MKDIR} ${STAGEDIR}${DATADIR}
 
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/share/pfsense-pkg-pfblockerng-addon-whitelist_rulegen/info.xml \
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/share/pfsense-pkg-dns_based_ip_whitelister/info.xml \
 		${STAGEDIR}${DATADIR}
 
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/post_install_tasks.php \
-		${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/dns_based_ip_whitelister/post_install_tasks.php \
+		${STAGEDIR}${PREFIX}/pkg/dns_based_ip_whitelister
 
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/__init__.py \
-		${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/__main__.py \
-		${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/app.py \
-		${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/filtersets/__init__.py \
-		${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/filtersets
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/filtersets/common.py \
-		${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/filtersets
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense/__init__.py \
-		${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense/api.py \
-		${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor/__init__.py \
+		${STAGEDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor/__main__.py \
+		${STAGEDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor/app.py \
+		${STAGEDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor/filtersets/__init__.py \
+		${STAGEDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor/filtersets
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor/filtersets/common.py \
+		${STAGEDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor/filtersets
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor/pfsense/__init__.py \
+		${STAGEDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor/pfsense
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor/pfsense/api.py \
+		${STAGEDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor/pfsense
 
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense/extract_config.php \
-		${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/whitelist_monitor/pfsense
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor/pfsense/extract_config.php \
+		${STAGEDIR}${PREFIX}/pkg/dns_based_ip_whitelister/whitelist_monitor/pfsense
 
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/etc/rc.d/svc_whitelist.sh \
-		${STAGEDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen/etc/rc.d
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/dns_based_ip_whitelister/etc/rc.d/svc_whitelist.sh \
+		${STAGEDIR}${PREFIX}/pkg/dns_based_ip_whitelister/etc/rc.d
 
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/www/pfblockerng-addon-whitelist_rulegen/whitelist_rulegen_configure.php \
-		${STAGEDIR}${PREFIX}/www/pfblockerng-addon-whitelist_rulegen
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/www/dns_based_ip_whitelister/whitelist_rulegen_configure.php \
+		${STAGEDIR}${PREFIX}/www/dns_based_ip_whitelister
 
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/pfblockerng-addon-whitelist_rulegen.xml \
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/dns_based_ip_whitelister.xml \
 		${STAGEDIR}${PREFIX}/pkg
 
-	${MKDIR} ${STAGEDIR}/pkg/pfblockerng-addon-whitelist_rulegen/venv
+	${MKDIR} ${STAGEDIR}/pkg/dns_based_ip_whitelister/venv
 
 	@${REINPLACE_CMD} -i '' -e "s|%%PKGVERSION%%|${PKGVERSION}|" \
 		${STAGEDIR}${DATADIR}/info.xml

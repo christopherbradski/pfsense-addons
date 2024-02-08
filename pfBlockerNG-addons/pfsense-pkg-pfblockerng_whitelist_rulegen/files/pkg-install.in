@@ -6,7 +6,7 @@ if [ "${2}" != "POST-INSTALL" ]; then
 fi
 
 # Path to the virtual environment
-VENV_PATH="/usr/local/pkg/pfblockerng-addon-whitelist_rulegen/venv"
+VENV_PATH="/usr/local/pkg/dns_based_ip_whitelister/venv"
 
 # Create a virtual environment
 /usr/local/bin/python3.11 -m venv ${VENV_PATH}
@@ -18,13 +18,13 @@ pip install requests
 # Deactivate the virtual environment
 deactivate
 
-/bin/chmod +x /usr/local/pkg/pfblockerng-addon-whitelist_rulegen/etc/rc.d/svc_whitelist.sh
-/bin/ln -s /usr/local/pkg/pfblockerng-addon-whitelist_rulegen/etc/rc.d/svc_whitelist.sh /usr/local/etc/rc.d/svc_whitelist.sh
+/bin/chmod +x /usr/local/pkg/dns_based_ip_whitelister/etc/rc.d/svc_whitelist.sh
+/bin/ln -s /usr/local/pkg/dns_based_ip_whitelister/etc/rc.d/svc_whitelist.sh /usr/local/etc/rc.d/svc_whitelist.sh
 
 case $2 in
 POST-INSTALL)
 	echo "Running post_install_tasks.php"
-	/usr/local/bin/php -f /usr/local/pkg/pfblockerng-addon-whitelist_rulegen/post_install_tasks.php
+	/usr/local/bin/php -f /usr/local/pkg/dns_based_ip_whitelister/post_install_tasks.php
 	echo "post_install_tasks.php script completed"
 	;;
 esac
